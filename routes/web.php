@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,16 +33,23 @@ foreach($files as $r){
 //     return view('welcome');
 // });
 
-Route::resources([
-    'roles' => RoleController::class,
-]);
 
-Route::get('/add_role', 'App\Http\Controllers\RoleController@addRole');
+
+// Route::get('/add_role', 'App\Http\Controllers\RoleController@addRole');
 
 // Route::group(['middleware' => ['can: tengok']],function () {
 // 	Route::get('/dummy', function () {
 // 		   return view('welcome');
 // 		});
 // });
+
+Route::group(['middleware' => ['role:ketua']], function() {
+	Route::prefix('admin')->group(function () {
+		Route::resources([
+			'roles' => RoleController::class,
+			'user'	=> UserController::class,
+		]);
+	});
+});
 
 

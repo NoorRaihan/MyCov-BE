@@ -15,7 +15,7 @@ use App\Http\Controllers\GreetingController;
 */
 
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 });
 
 //Route::get('greet', 'App\Http\Controllers\GreetingController@show');

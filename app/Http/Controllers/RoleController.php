@@ -27,7 +27,7 @@ class RoleController extends Controller
         ->join('permissions','role_has_permissions.permission_id','=','permissions.id')
         ->select(DB::raw('roles.id,roles.name,permissions.name as permissions'))
         ->get();
-
+        
         return view('role.index', [
             'roles' => $role
         ]);
@@ -40,12 +40,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        $role = Role::create(['name' => 'ketua']);
-        $permission = Permission::create(['name' => 'view_home']);
-        $role->givePermissionTo($permission);
-        $user->assignRole('ketua');
+        $permissions = Permission::all();
+        return view('role.create', [
+            'permissions' => $permissions
+        ]);
 
     }
 
@@ -62,7 +60,7 @@ class RoleController extends Controller
         if(!empty($request->role_permission)) {
             $role->givePermissionTo($request->role_permission);
         }
-        return redirect('roles');
+        return redirect('/admin/roles');
     }
 
     /**
@@ -84,7 +82,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        
     }
 
     /**

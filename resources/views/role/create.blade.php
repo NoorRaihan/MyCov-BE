@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="container">
-            <form method="POST" action="/roles">
+            <form method="POST" action="/admin/roles">
                 @csrf
                 <div class="mb-3">
                     <label for="role_name" class="form-label">Role's Name</label>
