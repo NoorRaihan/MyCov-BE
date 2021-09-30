@@ -78,7 +78,7 @@ class UserController extends Controller
     {   
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('user.create', [
+        return view('user.edit', [
             'user' => $user,
             'roles' => $roles
         ]);
@@ -99,7 +99,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->assignRole($request->role);
         if($user->save()) {
-            return view('user.index')->with('Update Successful');
+            return redirect()->route('user.index')-with('Update Success');
         }else {
             return view('user.index')->with('Update Failed!');
         }
