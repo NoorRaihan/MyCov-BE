@@ -11,7 +11,7 @@
                 </div>
                 @foreach ($permissions as $permission)
                     <div class="mb-3 form-check">
-                        <input type="checkbox" value="{{$permission->name}}" class="form-check-input" name="role_permission" id="permission">
+                        <input type="checkbox" value="{{$permission->name}}" class="form-check-input" name="role_permission[]" id="permission">
                         <label class="form-check-label" for="exampleCheck1">{{$permission->name}}</label>
                     </div>
                 @endforeach

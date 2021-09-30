@@ -97,9 +97,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->assignRole($request->role);
+        $user->syncRoles($request->role);
         if($user->save()) {
-            return redirect()->route('user.index')-with('Update Success');
+            return redirect()->route('user.index')->with('Update Success');
         }else {
             return view('user.index')->with('Update Failed!');
         }

@@ -18,7 +18,9 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$user->name}}</td>
-                        <td>{{$user->roles[0]->name}}</td>
+                        <td>@foreach ($user->getRoleNames() as $v)
+                            <span style="background-color: lightgreen">{{$v}}</span>&nbsp;
+                        @endforeach</td>
                         <td>
                             <form method="POST" action="{{ route('user.destroy', $user->id) }}">
                                 @csrf

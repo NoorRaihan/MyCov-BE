@@ -22,14 +22,17 @@ class RoleController extends Controller
         // $id = Auth::user()->id;
         // $user = User::find($id);
         // return $user->getRoleNames();
-        $role = DB::table('roles')
-        ->join('role_has_permissions','role_has_permissions.role_id', '=','roles.id')
-        ->join('permissions','role_has_permissions.permission_id','=','permissions.id')
-        ->select(DB::raw('roles.id,roles.name,permissions.name as permissions'))
-        ->get();
+        // $role = DB::table('roles')
+        // ->join('role_has_permissions','role_has_permissions.role_id', '=','roles.id')
+        // ->join('permissions','role_has_permissions.permission_id','=','permissions.id')
+        // ->select(DB::raw('roles.id,roles.name,permissions.name as permissions'))
+        // ->get();
+        $role = Role::with('permissions')->get();
+        $user = User::with('roles')->get();
         
         return view('role.index', [
-            'roles' => $role
+            'roles' => $role,
+            'users' => $user
         ]);
     }
 
@@ -56,7 +59,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $role = Role::create(['name' => $request->role_name]);
-
         if(!empty($request->role_permission)) {
             $role->givePermissionTo($request->role_permission);
         }

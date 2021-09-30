@@ -43,13 +43,20 @@ foreach($files as $r){
 // 		});
 // });
 
-Route::group(['middleware' => ['role:ketua']], function() {
-	Route::prefix('admin')->group(function () {
-		Route::resources([
-			'roles' => RoleController::class,
-			'user'	=> UserController::class,
-		]);
-	});
+Route::prefix('admin')->group(function () {
+	Route::resources([
+		'roles' => RoleController::class,
+		'user'	=> UserController::class,
+	]);
 });
+
+// Route::group(['middleware' => ['role:ketua']], function() {
+// 	Route::prefix('admin')->group(function () {
+// 		Route::resources([
+// 			'roles' => RoleController::class,
+// 			'user'	=> UserController::class,
+// 		]);
+// 	});
+// });
 
 

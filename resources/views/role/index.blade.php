@@ -18,7 +18,12 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$role->name}}</td>
-                        <td>{{$role->permissions}}</td>
+                        {{-- <td>{{$role->getPermissionNames()}}</td> --}}
+                        @php $count = 0; @endphp
+                        @foreach ($users as $user)
+                            @if($user->hasAnyRole($role->name)) @php $count++; @endphp @endif 
+                        @endforeach
+                        <td style="color: green">{{$count}} users</td>
                         <td>
                             <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
                                 @csrf

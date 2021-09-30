@@ -15,7 +15,7 @@
                 <h2>Roles</h2>
                 @foreach ($roles as $role)
                     <div class="mb-3 form-check">
-                        <input type="checkbox" value="{{$role->name}}" class="form-check-input" name="role" id="role">
+                        <input type="checkbox" value="{{$role->name}}" class="form-check-input" name="role[]" id="role">
                         <label class="form-check-label" for="exampleCheck1">{{$role->name}}</label>
                     </div>
                 @endforeach
