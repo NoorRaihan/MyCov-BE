@@ -1,5 +1,7 @@
 @extends('layouts.app');
-
+<head>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
 @section('content')
     <div>
         <div class="container">
@@ -14,7 +16,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users ?? '' as $user)
+                    @foreach ($users as $user)
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$user->name}}</td>
